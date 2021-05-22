@@ -1,0 +1,5 @@
+requests==2.25.1
+gpiozero==1.6.2
+RPi.GPIO
+pyserial
+opencv-python
