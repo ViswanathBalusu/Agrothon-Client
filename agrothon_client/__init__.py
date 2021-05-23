@@ -11,6 +11,7 @@ logging.basicConfig(
     ],
 )
 
+__VERSION__ = "1.0.0"
 LOGGER = logging.getLogger(__name__)
 
 parser = argparse.ArgumentParser()
@@ -26,10 +27,6 @@ USB_PORT = args.usb
 SERVER_API_KEY = args.apikey
 HOST = args.hostname
 
-if USB_PORT is not None and SERVER_API_KEY is not None and HOST is not None:
+if USB_PORT is None and SERVER_API_KEY is None and HOST is None:
+    LOGGER.error("Args Not Given, try Giving -h for more info")
     pass
-else:
-    LOGGER.info("Args Not Given, try Giving -h for more info")
-    exit(1)
-
-
