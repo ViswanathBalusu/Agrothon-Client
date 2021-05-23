@@ -3,7 +3,7 @@ import pathlib
 
 CWD = pathlib.Path(__file__).parent
 
-README = (CWD / "README.md").read_text()
+README = (CWD / "Readme.md").read_text()
 
 setup(
     name='AgroClient',
