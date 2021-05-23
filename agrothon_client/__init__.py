@@ -10,8 +10,6 @@ logging.basicConfig(
         logging.StreamHandler(),
     ],
 )
-
-__VERSION__ = "1.0.0"
 LOGGER = logging.getLogger(__name__)
 
 parser = argparse.ArgumentParser()

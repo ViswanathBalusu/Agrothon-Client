@@ -11,15 +11,15 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v1
         with:
-          python-version: 3.8.10
+          python-version: 3.7.3
       - name: Install Deps fro Pypi Release
         run: |
-          pip -q install setuptools wheel twine
-          pip -q install -r requirements.txt
+          pip3 -q install setuptools wheel twine
+          pip3 -q install -r requirements.txt
       - name: Publish to pypi
         env:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
         run: |
-          python setup.py sdist bdist_wheel
+          python3 setup.py sdist bdist_wheel
           twine upload dist/*

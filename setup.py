@@ -1,5 +1,4 @@
 from setuptools import setup, find_packages
-from agrothon_client import __VERSION__ as VER
 import pathlib
 
 CWD = pathlib.Path(__file__).parent
@@ -8,7 +7,7 @@ README = (CWD / "README.md").read_text()
 
 setup(
     name='AgroClient',
-    version=VER,
+    version="1.0.0",
     packages=find_packages(),
     long_description=README,
     long_description_content_type="text/markdown",
