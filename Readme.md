@@ -66,3 +66,11 @@ optional arguments:
 
 - Connect the Pi camera accordingly
 - Use SSH to access the terminal and run the Python Code
+- Connect all the `Vdd's` and `GND's` Accordingly
+
+## Note
+- To get the USB Device ID, Use
+    ```
+    ls /dev/tty*
+    ```
+    Most Probably the Value will be `/dev/ttyUSB0`
