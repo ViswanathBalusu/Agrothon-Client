@@ -14,9 +14,9 @@ LOGGER = logging.getLogger(__name__)
 
 parser = argparse.ArgumentParser()
 LOGGER.info("Parsing args")
-parser.add_argument("-y", "--hostname", help="API Server host name")
-parser.add_argument("-a", "--apikey", help="API Key of host")
-parser.add_argument("-u", "--usb", help="USB Port of Arduino")
+parser.add_argument("-y", "--hostname", help="API Server host name", required=True)
+parser.add_argument("-a", "--apikey", help="API Key of host", required=True)
+parser.add_argument("-u", "--usb", help="USB Port of Arduino", required=True)
 
 args = parser.parse_args()
 
@@ -24,7 +24,5 @@ args = parser.parse_args()
 USB_PORT = args.usb
 SERVER_API_KEY = args.apikey
 HOST = args.hostname
-
-if USB_PORT is None and SERVER_API_KEY is None and HOST is None:
-    LOGGER.error("Args Not Given, try Giving -h for more info")
-    pass
+if not HOST.endswith("/"):
+    HOST = HOST + "/"

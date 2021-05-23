@@ -12,3 +12,57 @@
 <a href="https://github.com/ViswanathBalusu/Agrothon-Client/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/ViswanathBalusu/Agrothon-Client?style=for-the-badge"></a>
 
 </div>
+
+## Installation
+- First Install the dependencies
+    ```
+    sudo apt-get update
+    sudo apt-get install python3-opencv python3-rpi.gpio
+    ```
+- from Pypi
+
+    ```
+    pip3 install AgroClient
+    ```
+- From git
+
+  ```
+  pip3 install git+https://github.com/viswanathbalusu/Agrothon-Client
+  ```
+## Usage
+
+```
+usage: AgroClient [-h] [-y HOSTNAME] [-a APIKEY] [-u USB]
+
+optional arguments:
+  -h, --help  show this help message and exit
+  -y, --hostname HOSTNAME API Server host name
+  -a, --apikey APIKEY API Key of host
+  -u, --usb USB     USB Port of Arduino
+```
+
+## Circuit Diagram
+
+![Circuit](.github/CircuitDiagram.jpg)
+
+## Pin Configuration
+
+- **Raspberry Pi**
+
+    | GPIO | Device | Use | Mode |
+    | :---: | :---: | :---: | :---: |
+    | `12` | Relay | To Switch on/off Relay | OUT |
+    | `25` | PIR1 | Motion Detection | IN |
+    | `8` | PIR2 | Motion Detection | IN |
+    | `7` | PIR3 | Motion Detection | IN |
+    | `1` | PIR3 | Motion Detection | IN |
+
+- **Arduino nano**
+
+    | Pin | Device | Device pin | Mode |
+    | :---: | :---: | :---: | :---: |
+    | `A0` | Moisture Sensor | Analog Out | IN |
+    | `D12` | DHT11 | Signal | IN |
+
+- Connect the Pi camera accordingly
+- Use SSH to access the terminal and run the Python Code
