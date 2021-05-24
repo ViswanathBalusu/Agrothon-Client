@@ -61,8 +61,10 @@ optional arguments:
 
     | Pin | Device | Device pin | Mode |
     | :---: | :---: | :---: | :---: |
-    | `A0` | Moisture Sensor | Analog Out | IN |
+    | `A0` | Moisture Sensor* | Analog Out | IN |
     | `D12` | DHT11 | Signal | IN |
+  
+    ```* For multiple sensors use differnet Analog pins```
 
 - Connect the Pi camera accordingly
 - Use SSH to access the terminal and run the Python Code
@@ -74,3 +76,9 @@ optional arguments:
     ls /dev/tty*
     ```
     Most Probably the Value will be `/dev/ttyUSB0`
+
+- Sensor data should be sent in the following pattern
+  
+    ```
+    mositure1,moisture2,moisture3, .... ,moistureN, Temperature,Humidity 
+    ```

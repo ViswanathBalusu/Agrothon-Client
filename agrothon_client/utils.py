@@ -37,18 +37,21 @@ def motion_intruder_detect():
                     LOGGER.error("maybe nothing found")
 
 def serial_sensor_in():
+    """
+    This Module just get the Serial lines from Arduino nano and decode them
+    """
     LOGGER.info("Starting Sensor module")
     while True:
         if serial_in.in_waiting:
             serial_line = serial_in.readline().decode('utf-8').strip()
             list_of_values = serial_line.split(",")
-            # sensor_data = []
             try:
-                sensor_dict = {"moisture": float(list_of_values[0]),"humidity": float(list_of_values[2]), "temperature":float(list_of_values[1])}
-                # for i in range(len(list_of_values)):
-                #     sensor_dict[sensor_data[i]] = float(list_of_values[i])
+                no_of_moist_sens = len(list_of_values)-2
+                moist_list = [] * no_of_moist_sens
+                for i in range(no_of_moist_sens):
+                    moist_list.append(float(list_of_values[i]))
+                sensor_dict = {"no_of_sensors": no_of_moist_sens, "moisture": moist_list, "humidity": float(list_of_values[len(list_of_values)-1]), "temperature":float(list_of_values[len(list_of_values)-2])}
                 sensor_data_post(json=sensor_dict)
-                # time.sleep(5)
             except ValueError:
                 LOGGER.error(serial_line)
                 LOGGER.error("DHT Data read failed")
