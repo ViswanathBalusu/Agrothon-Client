@@ -26,7 +26,7 @@ jobs:
       - name: Upload Wheel and Source Dist to Github Releases
         uses: softprops/action-gh-release@v1
         with:
-          name: Agrothon Release ${{ steps.get_version.outputs.VERSION }}
+          name: Agrothon-Client Release ${{ steps.get_version.outputs.VERSION }}
           files: |
             dist/*
         env:
