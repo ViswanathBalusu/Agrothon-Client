@@ -16,7 +16,7 @@ parser = argparse.ArgumentParser()
 LOGGER.info("Parsing args")
 parser.add_argument("-y", "--hostname", help="API Server host name", required=True)
 parser.add_argument("-a", "--apikey", help="API Key of host", required=True)
-parser.add_argument("-u", "--usb", help="USB Port of Arduino", required=True, type=str, default="/dev/ttyUSB0")
+parser.add_argument("-u", "--usb", help="USB Port of Arduino", type=str, default="/dev/ttyUSB0")
 
 args = parser.parse_args()
 

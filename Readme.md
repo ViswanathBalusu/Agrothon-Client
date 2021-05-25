@@ -43,8 +43,11 @@ optional arguments:
 
 ## Circuit Diagram
 
-![Circuit](.github/CircuitDiagram.jpg)
+![Circuit](https://raw.githubusercontent.com/viswanathbalusu/Agrothon-Client/main/images/CircuitDiagram.jpg)
 
+## Hardware
+
+![Hardware](https://raw.githubusercontent.com/viswanathbalusu/Agrothon-Client/main/images/projecthardware.jpg)
 ## Pin Configuration
 
 - **Raspberry Pi**
