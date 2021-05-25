@@ -7,7 +7,7 @@ README = (CWD / "Readme.md").read_text()
 
 setup(
     name='AgroClient',
-    version="1.0.3",
+    version="1.0.4",
     packages=find_packages(),
     long_description=README,
     long_description_content_type="text/markdown",
@@ -20,7 +20,7 @@ setup(
     platforms="any",
     install_requires=[
         "requests==2.25.1",
-        "gpiozero==1.6.2",
+        "gpiozero==1.5.1",
         "pyserial==3.5",
         "opencv-python==4.5.1.48",
         "RPi.GPIO==0.7.0"
