@@ -19,11 +19,15 @@ def main():
         pool = multiprocessing.Pool()
         sen_result = pool.apply_async(serial_sensor_in)
         pump_result = pool.apply_async(pump_status)
-        multiprocessing.Process(motion_intruder_detect(), daemon=True).start()
+        intruder_checker = multiprocessing.Process(motion_intruder_detect(), daemon=True)
+        intruder_checker.start()
         sen_result.wait()
         pump_result.wait()
     except KeyboardInterrupt:
         LOGGER.info("Keyboard interrupt given, exiting ...")
+        pool.close()
+        pool.join()
+        intruder_checker.join()
     finally:
         LOGGER.info("Exiting Program")
         os._exit(0)
