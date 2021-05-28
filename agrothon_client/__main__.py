@@ -14,6 +14,15 @@ import logging
 
 LOGGER = logging.getLogger(__name__)
 
+def handler(signalname):
+    def f(signal_received, frame):
+        raise KeyboardInterrupt(f"{signalname} received")
+    return f
+
+signal.signal(signal.SIGINT, handler("SIGINT"))
+signal.signal(signal.SIGTERM, handler("SIGTERM"))
+
+
 def main():
     try:
         pool = multiprocessing.Pool()
@@ -25,12 +34,15 @@ def main():
         pump_result.wait()
     except (KeyboardInterrupt,  SystemExit):
         LOGGER.info("Keyboard interrupt given, exiting ...")
+    finally:
+        LOGGER.info("Exiting all Programs")
         pool.terminate()
-        # pool.join()
+        pool.join()
+        pool.close()
+        intruder_checker.terminate()
         intruder_checker.join()
-    # finally:
-    #     LOGGER.info("Exiting Program")
-    #     os._exit(0)
+        intruder_checker.close()
+        os._exit(0)
 
 if __name__ == '__main__':
     main()
