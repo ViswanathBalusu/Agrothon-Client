@@ -15,13 +15,13 @@ import logging
 
 LOGGER = logging.getLogger(__name__)
 
-def handler(signalname):
-    def f(signal_received, frame):
-        raise KeyboardInterrupt(f"{signalname} received")
-    return f
+# def handler(signalname):
+#     def f(signal_received, frame):
+#         pass
+#     return f
 
-signal.signal(signal.SIGINT, handler("SIGINT"))
-signal.signal(signal.SIGTERM, handler("SIGTERM"))
+# signal.signal(signal.SIGINT, handler("SIGINT"))
+# signal.signal(signal.SIGTERM, handler("SIGTERM"))
 
 
 def main():
@@ -43,7 +43,7 @@ def main():
         intruder_checker.terminate()
         intruder_checker.join()
         intruder_checker.close()
-        os._exit(0)
+        # os._exit(0)
 
 if __name__ == '__main__':
     main()
