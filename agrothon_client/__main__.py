@@ -1,3 +1,12 @@
+"""
+@File    :   __main__.py
+@Path    :   agrothon_client/
+@Time    :   2021/05/28
+@Author  :   Chandra Kiran Viswanath Balusu
+@Version :   1.0.7
+@Contact :   ckvbalusu@gmail.com
+@Desc    :   Main Module for Agrothon
+"""
 from .utils import *
 import multiprocessing
 

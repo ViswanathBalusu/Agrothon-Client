@@ -1,3 +1,13 @@
+"""
+@File    :   utils.py
+@Path    :   agrothon_client/
+@Time    :   2021/05/28
+@Author  :   Chandra Kiran Viswanath Balusu
+@Version :   1.0.7
+@Contact :   ckvbalusu@gmail.com
+@Desc    :   Utils Module for Agrothon Client
+"""
+
 from gpiozero import MotionSensor, OutputDevice
 from cv2 import VideoCapture, imencode
 from .request_helper import *
@@ -47,7 +57,7 @@ def motion_intruder_detect():
 
 def serial_sensor_in():
     """
-    This Module just get the Serial lines from Arduino nano and decode them
+    This Function just get the Serial lines from Arduino NANO and decode them
     """
     LOGGER.info("Starting Sensor module")
     while True:
@@ -73,11 +83,11 @@ def pump_status():
         if resp:
             pump.off()
 
-            LOGGER.info(f"Pump is {pump.value}")
+            LOGGER.info(f"Pump is ON")
         elif not resp:
             pump.on()
-            LOGGER.info(f"Pump is {pump.value}")
+            LOGGER.info(f"Pump is OFF")
         else:
-            LOGGER.error("Bruhhhh....")
+            LOGGER.error("Error Updating PUMP Status")
             pass
 

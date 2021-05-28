@@ -1,3 +1,12 @@
+"""
+@File    :   __init__.py
+@Path    :   agrothon_client/
+@Time    :   2021/05/28
+@Author  :   Chandra Kiran Viswanath Balusu
+@Version :   1.0.7
+@Contact :   init Module for Agrothon
+"""
+__VERSION__ = "1.0.7"
 import argparse
 import logging
 from logging.handlers import RotatingFileHandler

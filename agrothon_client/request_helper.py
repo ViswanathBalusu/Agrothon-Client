@@ -1,3 +1,12 @@
+"""
+@File    :   request_helper.py
+@Path    :   agrothon_client/
+@Time    :   2021/05/28
+@Author  :   Chandra Kiran Viswanath Balusu
+@Version :   1.0.7
+@Contact :   ckvbalusu@gmail.com
+@Desc    :   API Request helper Module for Agrothon
+"""
 import requests
 import io
 from typing import Optional

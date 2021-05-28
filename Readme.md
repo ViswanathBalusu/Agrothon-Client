@@ -34,7 +34,7 @@
   
     ```
     curl -sSL https://get.docker.com | sudo sh
-    sudo usermod -aG docker ${USER
+    sudo usermod -aG docker ${USER}
     ```
   - Get the `docker-compose.yml` and `agrothonclient.env` to a local directory
 
