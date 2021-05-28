@@ -4,16 +4,24 @@ from .request_helper import *
 import io
 import logging
 from serial import Serial
-from agrothon_client import USB_PORT
+from agrothon_client import (
+    USB_PORT,
+    USB_BAUD_RATE,
+    RELAY_GPIO,
+    PIR1_GPIO,
+    PIR2_GPIO,
+    PIR3_GPIO,
+    PIR4_GPIO
+    )
 
-serial_in = Serial(USB_PORT, 9600)
+serial_in = Serial(USB_PORT, USB_BAUD_RATE)
 
-pump = OutputDevice(12, active_high=True, initial_value=True)
+pump = OutputDevice(RELAY_GPIO, active_high=True, initial_value=True)
 
-pir1 = MotionSensor(25)
-pir2 = MotionSensor(8)
-pir3 = MotionSensor(7)
-pir4 = MotionSensor(1)
+pir1 = MotionSensor(PIR1_GPIO)
+pir2 = MotionSensor(PIR2_GPIO)
+pir3 = MotionSensor(PIR3_GPIO)
+pir4 = MotionSensor(PIR4_GPIO)
 
 LOGGER = logging.getLogger(__name__)
 
@@ -35,6 +43,7 @@ def motion_intruder_detect():
                     LOGGER.info(f"Intruder Detected:{str(resp)}")
                 else:
                     LOGGER.error("maybe nothing found")
+
 
 def serial_sensor_in():
     """
