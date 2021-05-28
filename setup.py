@@ -7,7 +7,7 @@ README = (CWD / "Readme.md").read_text()
 
 setup(
     name='AgroClient',
-    version="1.0.5",
+    version="1.0.6",
     packages=find_packages(),
     long_description=README,
     long_description_content_type="text/markdown",

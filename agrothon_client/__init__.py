@@ -16,19 +16,19 @@ parser = argparse.ArgumentParser()
 parser.add_argument("-y", "--hostname", help="API Server host name", required=True)
 parser.add_argument("-a", "--apikey", help="API Key of host", required=True)
 parser.add_argument("-u", "--usb", help="USB Port of Arduino", type=str, default="/dev/ttyUSB0")
-parser.add_argument("-p1", "--PIR1", help="GPIO Pin of PIR1", type=int, default=25)
-parser.add_argument("-p2", "--PIR2", help="GPIO Pin of PIR1", type=int, default=8)
-parser.add_argument("-p3", "--PIR3", help="GPIO Pin of PIR1", type=int, default=7)
-parser.add_argument("-p4", "--PIR4", help="GPIO Pin of PIR1", type=int, default=1)
+parser.add_argument("-p1", "--pir1", help="GPIO Pin of PIR1", type=int, default=25)
+parser.add_argument("-p2", "--pir2", help="GPIO Pin of PIR2", type=int, default=8)
+parser.add_argument("-p3", "--pir3", help="GPIO Pin of PIR3", type=int, default=7)
+parser.add_argument("-p4", "--pir4", help="GPIO Pin of PIR4", type=int, default=1)
 parser.add_argument("-br", "--baudrate", help="Baud rate of USB Port to read sensor data", type=int, default=9600)
 parser.add_argument("-r", "--relay", help="Relay Signalling GPIO pin", type=int, default=12)
 args = parser.parse_args()
 
 LOGGER.info("Parsed args")
-PIR1_GPIO = args.PIR1
-PIR2_GPIO = args.PIR2
-PIR3_GPIO = args.PIR3
-PIR4_GPIO = args.PIR4
+PIR1_GPIO = args.pir1
+PIR2_GPIO = args.pir2
+PIR3_GPIO = args.pir3
+PIR4_GPIO = args.pir4
 
 RELAY_GPIO = args.relay
 

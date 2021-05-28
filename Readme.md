@@ -27,18 +27,25 @@
 - From git
 
   ```
-  pip3 install git+https://github.com/viswanathbalusu/Agrothon-Client
+  pip3 install -U git+https://github.com/viswanathbalusu/Agrothon-Client
   ```
 ## Usage
 
 ```
-usage: AgroClient [-h] [-y HOSTNAME] [-a APIKEY] [-u USB]
+usage: AgroClient [-h] -y HOSTNAME -a APIKEY [-u USB] [-p1 PIR1] [-p2 PIR2]
+                  [-p3 PIR3] [-p4 PIR4] [-br BAUDRATE] [-r RELAY]
 
 optional arguments:
-  -h, --help  show this help message and exit
-  -y, --hostname HOSTNAME API Server host name
-  -a, --apikey APIKEY API Key of host
-  -u, --usb USB     USB Port of Arduino
+  -h, --help, show this help message and exit
+  -y, --hostname HOSTNAME, API Server host name
+  -a, --apikey APIKEY, API Key of host
+  -u, --usb USB, USB Port of Arduino
+  -p1, --pir1 PIR1, GPIO Pin of PIR1
+  -p2, --pir2 PIR2, GPIO Pin of PIR2
+  -p3, --pir3 PIR3, GPIO Pin of PIR3
+  -p4, --pir4 PIR4, GPIO Pin of PIR4
+  -br, --baudrate BAUDRATE, Baud rate of USB Port to read sensor data
+  -r, --relay RELAY, Relay Signalling GPIO pin
 ```
 
 ## Circuit Diagram
@@ -48,7 +55,7 @@ optional arguments:
 ## Hardware
 
 ![Hardware](https://raw.githubusercontent.com/viswanathbalusu/Agrothon-Client/main/images/projecthardware.jpg)
-## Pin Configuration
+## Pin Configuration (Default)
 
 - **Raspberry Pi**
 
@@ -69,9 +76,9 @@ optional arguments:
   
     ```* For multiple sensors use differnet Analog pins```
 
-- Connect the Pi camera accordingly
+- Connect the Pi camera to CSI Port
 - Use SSH to access the terminal and run the Python Code
-- Connect all the `Vdd's` and `GND's` Accordingly
+- Connect all the `Vdd's` and `GND's` to 5V and GND (or as per instructions given in spec sheet)
 
 ## Note
 - To get the USB Device ID, Use
@@ -83,5 +90,6 @@ optional arguments:
 - Sensor data should be sent in the following pattern
   
     ```
-    mositure1,moisture2,moisture3, .... ,moistureN, Temperature,Humidity 
+    mositure1,moisture2,moisture3, .... ,moistureN, Temperature,Humidity
+    ex : 55.29,52.59,32.5,65.26
     ```
