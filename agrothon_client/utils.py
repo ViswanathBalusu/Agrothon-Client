@@ -55,9 +55,9 @@ def motion_intruder_detect():
                         LOGGER.info(f"Intruder Detected:{str(resp)}")
                     else:
                         LOGGER.error("maybe nothing found")
-            except KeyboardInterrupt:
-                LOGGER.info("Exiting, Intruder Module")
-                sys.exit(0)
+        except KeyboardInterrupt:
+            LOGGER.info("Exiting, Intruder Module")
+            sys.exit(0)
 
 
 def serial_sensor_in():
