@@ -1,13 +1,12 @@
 from setuptools import setup, find_packages
 import pathlib
-from agrothon_client import __VERSION__ as VER
 CWD = pathlib.Path(__file__).parent
 
 README = (CWD / "Readme.md").read_text()
 
 setup(
     name='AgroClient',
-    version=VER,
+    version="1.0.7",
     packages=find_packages(),
     long_description=README,
     long_description_content_type="text/markdown",
