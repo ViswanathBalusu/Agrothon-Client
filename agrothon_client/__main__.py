@@ -10,6 +10,7 @@
 from .utils import serial_sensor_in, pump_status, motion_intruder_detect
 import multiprocessing
 import os
+import signal
 import logging
 
 LOGGER = logging.getLogger(__name__)
