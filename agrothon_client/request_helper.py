@@ -9,6 +9,7 @@
 """
 import requests
 import io
+import os
 from typing import Optional
 from agrothon_client import SERVER_API_KEY, HOST
 import logging
@@ -19,24 +20,30 @@ LOGGER = logging.getLogger(__name__)
 def sensor_data_post(json: dict) -> bool:
     base_url = f"{HOST}field/sensor?api_key={SERVER_API_KEY}"
     LOGGER.info("Started posting")
-    resp = session.post(base_url, json=json)
-    if resp.status_code == 200:
-        LOGGER.info(resp.json())
-        return True
-    else:
-        LOGGER.info(resp.status_code)
-        return False
+    try:
+        resp = session.post(base_url, json=json)
+        if resp.status_code == 200:
+            LOGGER.info(resp.json())
+            return True
+        else:
+            LOGGER.info(resp.status_code)
+            return False
+    except KeyboardInterrupt:
+        os._exit()
 
 
 def image_poster(image: io.BytesIO) -> bool:
     base_url = f"{HOST}intruder/detect?api_key={SERVER_API_KEY}"
     LOGGER.info("Started posting IMage")
-    data = {"image": image}
-    resp = session.post(base_url, files=data)
-    if resp.status_code == 200:
-        return True
-    else:
-        return False
+    try:
+        data = {"image": image}
+        resp = session.post(base_url, files=data)
+        if resp.status_code == 200:
+            return True
+        else:
+            return False
+    except KeyboardInterrupt:
+        os._exit()
 
 
 def pump_status_check() -> Optional[bool]:
@@ -53,6 +60,8 @@ def pump_status_check() -> Optional[bool]:
                 return None
         else:
             return None
+    except KeyboardInterrupt:
+        os._exit()  
     except Exception as e:
         LOGGER.error(e)
         pass

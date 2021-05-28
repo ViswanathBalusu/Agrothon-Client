@@ -26,26 +26,23 @@ LOGGER = logging.getLogger(__name__)
 
 def main():
     try:
-        with multiprocessing.Pool() as pool:
-            sen_result = pool.apply_async(serial_sensor_in)
-            pump_result = pool.apply_async(pump_status)
-            intruder_result = pool.apply_async(motion_intruder_detect)
-            sen_result.wait()
-            pump_result.wait()
-            intruder_result.wait()
-        # intruder_checker = multiprocessing.Process(motion_intruder_detect(), daemon=True)
-        # intruder_checker.start()
-
+        pool = multiprocessing.Pool()
+        sen_result = pool.apply_async(serial_sensor_in)
+        pump_result = pool.apply_async(pump_status)
+        intruder_checker = multiprocessing.Process(motion_intruder_detect(), daemon=True)
+        intruder_checker.start()
+        sen_result.wait()
+        pump_result.wait()
     except (KeyboardInterrupt,  SystemExit):
         LOGGER.info("Keyboard interrupt given, exiting ...")
     finally:
         LOGGER.info("Exiting all Programs")
-        # pool.terminate()
-        # pool.join()
-        # pool.close()
-        # intruder_checker.terminate()
-        # intruder_checker.join()
-        # intruder_checker.close()
+        pool.terminate()
+        pool.join()
+        pool.close()
+        intruder_checker.terminate()
+        intruder_checker.join()
+        intruder_checker.close()
         os._exit(0)
 
 if __name__ == '__main__':
