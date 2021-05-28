@@ -3,7 +3,7 @@
 @Path    :   agrothon_client/
 @Time    :   2021/05/28
 @Author  :   Chandra Kiran Viswanath Balusu
-@Version :   1.0.7
+@Version :   1.0.8
 @Contact :   ckvbalusu@gmail.com
 @Desc    :   Utils Module for Agrothon Client
 """
@@ -13,6 +13,7 @@ from cv2 import VideoCapture, imencode
 from .request_helper import *
 import io
 import logging
+import sys
 from serial import Serial
 from agrothon_client import (
     USB_PORT,
@@ -39,20 +40,24 @@ LOGGER = logging.getLogger(__name__)
 def motion_intruder_detect():
     LOGGER.info("Starting Intruder Module")
     while True:
-        if pir1.motion_detected or pir2.motion_detected or pir3.motion_detected or pir4.motion_detected:
-            LOGGER.info(f"PIR1 : {pir1.value}, PIR2 : {pir2.value}, PIR3 : {pir3.value}. PIR4 : {pir4.value}")
-            LOGGER.info("Launching camera")
-            img_cap = VideoCapture(0)
-            check, frame = img_cap.read()
-            is_success, cv2_img = imencode(".jpg", frame)
-            img_cap.release()
-            if is_success:
-                data = io.BytesIO(cv2_img)
-                resp = image_poster(data)
-                if resp:
-                    LOGGER.info(f"Intruder Detected:{str(resp)}")
-                else:
-                    LOGGER.error("maybe nothing found")
+        try:
+            if pir1.motion_detected or pir2.motion_detected or pir3.motion_detected or pir4.motion_detected:
+                LOGGER.info(f"PIR1 : {pir1.value}, PIR2 : {pir2.value}, PIR3 : {pir3.value}. PIR4 : {pir4.value}")
+                LOGGER.info("Launching camera")
+                img_cap = VideoCapture(0)
+                check, frame = img_cap.read()
+                is_success, cv2_img = imencode(".jpg", frame)
+                img_cap.release()
+                if is_success:
+                    data = io.BytesIO(cv2_img)
+                    resp = image_poster(data)
+                    if resp:
+                        LOGGER.info(f"Intruder Detected:{str(resp)}")
+                    else:
+                        LOGGER.error("maybe nothing found")
+            except KeyboardInterrupt:
+                LOGGER.info("Exiting, Intruder Module")
+                sys.exit(0)
 
 
 def serial_sensor_in():
@@ -61,33 +66,42 @@ def serial_sensor_in():
     """
     LOGGER.info("Starting Sensor module")
     while True:
-        if serial_in.in_waiting:
-            serial_line = serial_in.readline().decode('utf-8').strip()
-            list_of_values = serial_line.split(",")
-            try:
-                no_of_moist_sens = len(list_of_values)-2
-                moist_list = [] * no_of_moist_sens
-                for i in range(no_of_moist_sens):
-                    moist_list.append(float(list_of_values[i]))
-                sensor_dict = {"no_of_sensors": no_of_moist_sens, "moisture": moist_list, "humidity": float(list_of_values[len(list_of_values)-1]), "temperature":float(list_of_values[len(list_of_values)-2])}
-                sensor_data_post(json=sensor_dict)
-            except ValueError:
-                LOGGER.error(serial_line)
-                LOGGER.error("DHT Data read failed")
-                pass
+        try:
+            if serial_in.in_waiting:
+                serial_line = serial_in.readline().decode('utf-8').strip()
+                list_of_values = serial_line.split(",")
+                try:
+                    no_of_moist_sens = len(list_of_values)-2
+                    moist_list = [] * no_of_moist_sens
+                    for i in range(no_of_moist_sens):
+                        moist_list.append(float(list_of_values[i]))
+                    sensor_dict = {"no_of_sensors": no_of_moist_sens, "moisture": moist_list, "humidity": float(list_of_values[len(list_of_values)-1]), "temperature":float(list_of_values[len(list_of_values)-2])}
+                    sensor_data_post(json=sensor_dict)
+                except ValueError:
+                    LOGGER.error(serial_line)
+                    LOGGER.error("DHT Data read failed")
+                    pass
+        except KeyboardInterrupt:
+            LOGGER.info("Exiting Sensor module...")
+            sys.exit(0)
 
 def pump_status():
     LOGGER.info("Starting Pump status Check")
     while True:
-        resp = pump_status_check()
-        if resp:
-            pump.off()
+        try:
+            resp = pump_status_check()
+            if resp:
+                pump.off()
 
-            LOGGER.info(f"Pump is ON")
-        elif not resp:
-            pump.on()
-            LOGGER.info(f"Pump is OFF")
-        else:
-            LOGGER.error("Error Updating PUMP Status")
-            pass
+                LOGGER.info(f"Pump is ON")
+            elif not resp:
+                pump.on()
+                LOGGER.info(f"Pump is OFF")
+            else:
+                LOGGER.error("Error Updating PUMP Status")
+                pass
+        except KeyboardInterrupt:
+            pump.on() # Switching off the pump as  program is exiting
+            LOGGER.info("Exiting Pump Status check module...")
+            sys.exit(0)
 

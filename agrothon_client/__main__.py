@@ -7,7 +7,7 @@
 @Contact :   ckvbalusu@gmail.com
 @Desc    :   Main Module for Agrothon
 """
-from .utils import *
+from .utils import serial_sensor_in, pump_status, motion_intruder_detect
 import multiprocessing
 import sys
 import logging
@@ -23,8 +23,7 @@ def main():
         sen_result.wait()
         pump_result.wait()
     except KeyboardInterrupt:
-        LOGGER.info("Switch pump off as Signal is given")
-        pump.on() # Switch off the pump if the program exits
+        LOGGER.info("Keyboard interrupt given, exiting ...")
     finally:
         LOGGER.info("Exiting Program")
         sys.exit(0)
