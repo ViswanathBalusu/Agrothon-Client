@@ -29,6 +29,27 @@
   ```
   pip3 install -U git+https://github.com/viswanathbalusu/Agrothon-Client
   ```
+- Using Docker
+  - First install docker
+  
+    ```
+    curl -sSL https://get.docker.com | sudo sh
+    sudo usermod -aG docker ${USER
+    ```
+  - Get the `docker-compose.yml` and `agrothonclient.env` to a local directory
+
+    ```
+    wget -q https://raw.githubusercontent.com/viswanathbalusu/Agrothon-Client/main/docker-compose.yml
+    wget -q https://raw.githubusercontent.com/viswanathbalusu/Agrothon-Client/main/agroclient-sample.env -O agroclient.env
+    ```
+  - Edit the Variables in agroclient.env and start docker container
+
+    ```
+    pip3 -q install docker-compose
+    docker-compose up -d
+    ```
+  - Docker method only works one `arm-v7` host OS
+
 ## Usage
 
 ```

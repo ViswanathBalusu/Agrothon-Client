@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  AgroClient:
+    image: ghcr.io/viswanathbalusu/agroclient:latest
+    env_file:
+      # Should be filled up and should be kept in the same directory
+      - agroclient.env
+    restart: unless-stopped
+    devices:
+      # Dont edit if you dont know
+      - "/dev/ttyUSB0:/dev/ttyUSB0" # Edit this if you have a different port
+      - "/dev/gpiomem:/dev/gpiomem" # GPIO Devices
+      - "/dev/video0:/dev/video0" # Camera 
