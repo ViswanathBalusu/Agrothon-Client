@@ -9,7 +9,7 @@
 """
 from .utils import serial_sensor_in, pump_status, motion_intruder_detect
 import multiprocessing
-import sys
+import os
 import logging
 
 LOGGER = logging.getLogger(__name__)
@@ -26,7 +26,7 @@ def main():
         LOGGER.info("Keyboard interrupt given, exiting ...")
     finally:
         LOGGER.info("Exiting Program")
-        sys.exit(0)
+        os._exit(0)
 
 if __name__ == '__main__':
     main()

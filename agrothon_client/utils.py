@@ -12,6 +12,7 @@ from gpiozero import MotionSensor, OutputDevice
 from cv2 import VideoCapture, imencode
 from .request_helper import *
 import io
+import os
 import logging
 import sys
 from serial import Serial
@@ -57,7 +58,7 @@ def motion_intruder_detect():
                         LOGGER.error("maybe nothing found")
         except KeyboardInterrupt:
             LOGGER.info("Exiting, Intruder Module")
-            sys.exit(0)
+            os._exit(0)
 
 
 def serial_sensor_in():
@@ -83,7 +84,7 @@ def serial_sensor_in():
                     pass
         except KeyboardInterrupt:
             LOGGER.info("Exiting Sensor module...")
-            sys.exit(0)
+            os._exit(0)
 
 def pump_status():
     LOGGER.info("Starting Pump status Check")
@@ -103,5 +104,5 @@ def pump_status():
         except KeyboardInterrupt:
             pump.on() # Switching off the pump as  program is exiting
             LOGGER.info("Exiting Pump Status check module...")
-            sys.exit(0)
+            os._exit(0)
 
