@@ -23,14 +23,14 @@ def main():
         intruder_checker.start()
         sen_result.wait()
         pump_result.wait()
-    except KeyboardInterrupt:
+    except (KeyboardInterrupt,  SystemExit):
         LOGGER.info("Keyboard interrupt given, exiting ...")
-        pool.close()
-        pool.join()
+        pool.terminate()
+        # pool.join()
         intruder_checker.join()
-    finally:
-        LOGGER.info("Exiting Program")
-        os._exit(0)
+    # finally:
+    #     LOGGER.info("Exiting Program")
+    #     os._exit(0)
 
 if __name__ == '__main__':
     main()
