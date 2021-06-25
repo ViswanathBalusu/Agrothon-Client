@@ -3,6 +3,7 @@ FROM python:3.7.10-slim
 WORKDIR /app/
 
 RUN apt-get update && \
+	apt-get install -y build-essential && \
 	apt-get install -y libaom0 libatk-bridge2.0-0 libatk1.0-0 \
 	libatlas3-base libatspi2.0-0 libavcodec58 libavformat58 \
 	libavutil56 libbluray2 libcairo-gobject2 libcairo2 libchromaprint1 \
@@ -18,7 +19,7 @@ RUN apt-get update && \
 	libwebp6 libwebpmux3 libx264-155 libx265-165 libxcb-render0 libxcb-shm0 \
 	libxcomposite1 libxcursor1 libxdamage1 libxfixes3 libxi6 \
 	libxinerama1 libxkbcommon0 libxrandr2 libxrender1 libxvidcore4 libzvbi0 && \
-	apt-get -y autoremove && rm -rf /var/lib/apt/lists/* && apt-get clean && \
-	pip3 install --no-cache-dir --extra-index-url https://www.piwheels.org/simple AgroClient
+	pip3 install --no-cache-dir --extra-index-url https://www.piwheels.org/simple AgroClient && \
+	apt-get purge -y build-essential && apt-get -y autoremove && rm -rf /var/lib/apt/lists/* && apt-get clean
 
 CMD AgroClient -y $API_HOST -a $API_KEY -p1 $PIR1_GPIO -p2 $PIR2_GPIO -p3 $PIR3_GPIO -p4 $PIR4_GPIO -br $USB_BAUD_RATE -r $RELAY_GPIO -u $USB_DEVICE
