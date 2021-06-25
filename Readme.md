@@ -48,7 +48,7 @@
     pip3 -q install docker-compose
     docker-compose up -d
     ```
-  - Docker method only works one `arm-v7` host OS
+  - Docker method only works on `linux/arm/v7`, `linux/arm64/v8`, `linux/amd64` (CPU) architecture
 
 ## Usage
 
